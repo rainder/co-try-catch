@@ -1,0 +1,31 @@
+{
+  "name": "co-try-catch",
+  "version": "0.1.0",
+  "description": "go-style try catch implementation using co library",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/mocha/bin/_mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rainder/co-try-catch.git"
+  },
+  "keywords": [
+    "co",
+    "try",
+    "catch",
+    "go",
+    "go-lang"
+  ],
+  "author": "Andrius Skerla",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rainder/co-try-catch/issues"
+  },
+  "homepage": "https://github.com/rainder/co-try-catch#readme",
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "co-mocha": "^1.1.2",
+    "mocha": "^2.3.3"
+  }
+}
