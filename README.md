@@ -22,6 +22,13 @@ function *getData() {
 
 ```
 
+...also, if you prefer...
+
+```js
+const { err, result } = yield tryCatch(makeAsyncRequest(options));
+
+```
+
 ## Api
 ### \*tryCatch(gen: Function|Function*|Promise): CoTryCatchResult
 ### CoTryCatchResult

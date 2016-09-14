@@ -66,6 +66,9 @@ describe('try-catch', function () {
     r.should.instanceof(CoTryCatchResult);
     r.isError().should.equals(true);
     r.getError().message.should.equals('test');
+
+    const { err } = yield f2();
+    err.message.should.equals('test');
   });
 
 });
