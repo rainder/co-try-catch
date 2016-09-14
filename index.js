@@ -1,11 +1,16 @@
 'use strict';
 
-module.exports = tryCatch;
+const CoTryCatchResult = require('./lib/co-try-catch-result');
+
+module.exports = {
+  tryCatch,
+  CoTryCatchResult
+};
 
 /**
  *
  * @param gen
- * @returns {{result: *, err: *}}
+ * @returns {CoTryCatchResult}
  */
 function *tryCatch(gen) {
   let err;
@@ -13,9 +18,13 @@ function *tryCatch(gen) {
 
   try {
     result = yield gen;
+    if (result instanceof CoTryCatchResult) {
+      err = result.err;
+      result = result.result;
+    }
   } catch (e) {
     err = e;
   }
 
-  return { result, err };
+  return new CoTryCatchResult(err, result);
 }

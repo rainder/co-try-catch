@@ -2,7 +2,7 @@
 
 const mocha = require('co-mocha');
 const chai = require('chai');
-const tryCatch = require('./..');
+const { tryCatch, CoTryCatchResult } = require('./..');
 
 chai.should();
 
@@ -48,4 +48,24 @@ describe('try-catch', function () {
     shouldError(result);
     result.err.should.equals(10);
   });
+
+  it('should handle tryCatch inide tryCatch', function *() {
+    const exception = function *() {
+      throw new Error('test');
+    };
+
+    const f1 = function *() {
+      return yield tryCatch(exception())
+    };
+
+    const f2 = function *() {
+      return yield tryCatch(f1())
+    };
+
+    const r = yield f2();
+    r.should.instanceof(CoTryCatchResult);
+    r.isError().should.equals(true);
+    r.getError().message.should.equals('test');
+  });
+
 });
