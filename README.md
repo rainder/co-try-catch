@@ -30,8 +30,8 @@ const { err, result } = yield tryCatch(makeAsyncRequest(options));
 ```
 
 ## Api
-### \*tryCatch(gen: Function|Function*|Promise): CoTryCatchResult
-### CoTryCatchResult
+### \*tryCatch(gen: Function|Function*|Promise): TryCatchResult
+### TryCatchResult
 #### isError(): Boolean
 Returns if function has thrown an error
 
@@ -51,7 +51,7 @@ Returns the thrown object
 Returns result of the function execution
 
 ## Supports nested calls
-if a function call returns an instance of `CoTryCatchResult` it is passed up to the caller
+if a function call returns an instance of `TryCatchResult` it is passed up to the caller
 
 ```js
 const { tryCatch } = require('co-try-catch');
