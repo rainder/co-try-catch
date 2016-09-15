@@ -2,7 +2,7 @@
 
 const mocha = require('co-mocha');
 const chai = require('chai');
-const { tryCatch, CoTryCatchResult } = require('./..');
+const { tryCatch, TryCatchResult } = require('./..');
 
 chai.should();
 
@@ -63,7 +63,7 @@ describe('try-catch', function () {
     };
 
     const r = yield f2();
-    r.should.instanceof(CoTryCatchResult);
+    r.should.instanceof(TryCatchResult);
     r.isError().should.equals(true);
     r.getError().message.should.equals('test');
 
