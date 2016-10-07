@@ -1,6 +1,6 @@
 'use strict';
 
-const mocha = require('co-mocha');
+const co = require('co');
 const chai = require('chai');
 const { tryCatch, TryCatchResult } = require('./..');
 
@@ -18,7 +18,7 @@ describe('try-catch', function () {
     (!!result.result).should.equals(true);
   }
 
-  it('should catch the error', function *() {
+  it('should catch the error', co.wrap(function *() {
     const error = new Error('');
 
     const result = yield tryCatch(function *() {
@@ -27,18 +27,18 @@ describe('try-catch', function () {
 
     shouldError(result);
     result.err.should.equals(error);
-  });
+  }));
 
-  it('should succeed', function *() {
+  it('should succeed', co.wrap(function *() {
     const result = yield tryCatch(function *() {
       return 10;
     }());
 
     shouldNotError(result);
     result.result.should.equals(10);
-  });
+  }));
 
-  it('should handle promises', function *() {
+  it('should handle promises', co.wrap(function *() {
     const promise = new Promise(function (resolve, reject) {
       reject(10);
     });
@@ -47,9 +47,9 @@ describe('try-catch', function () {
 
     shouldError(result);
     result.err.should.equals(10);
-  });
+  }));
 
-  it('should handle tryCatch inide tryCatch', function *() {
+  it('should handle tryCatch inide tryCatch', co.wrap(function *() {
     const exception = function *() {
       throw new Error('test');
     };
@@ -69,6 +69,10 @@ describe('try-catch', function () {
 
     const { err } = yield f2();
     err.message.should.equals('test');
-  });
+  }));
 
+  it('should throw null', co.wrap(function *() {
+    const result = yield tryCatch(Promise.reject());
+    result.failed().should.equals(true);
+  }));
 });
