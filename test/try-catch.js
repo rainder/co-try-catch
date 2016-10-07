@@ -74,5 +74,6 @@ describe('try-catch', function () {
   it('should throw null', co.wrap(function *() {
     const result = yield tryCatch(Promise.reject());
     result.failed().should.equals(true);
+    result.err.should.be.instanceOf(Error);
   }));
 });
